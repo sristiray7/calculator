@@ -1,3 +1,4 @@
+import os 
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import webbrowser
@@ -8,7 +9,8 @@ import engines
 app = Flask(__name__, template_folder='templates', static_folder='static')
 CORS(app)
 
-
+def open_browser():
+    webbrowser.open_new("http://127.0.0.1:5000/")
 # -------------------------------------------------------------------------
 # UI ROUTE (Serves Frontend Shell Layout)
 # -------------------------------------------------------------------------
@@ -85,10 +87,26 @@ def central_calculator_router():
 # -------------------------------------------------------------------------
 # APPLICATION ENTRY CONTROL
 # -------------------------------------------------------------------------
-if __name__ == '__main__':
-    # Starts a safe 1.5-second background thread clock delay before executing open_browser()
-    # This prevents your browser from opening before the Flask web port is fully initialized.
-    Timer(1.5, open_browser).start()
-    
-    # Fire up the engine server gateway
-    app.run(host='127.0.0.1', port=5000, debug=True, use_reloader=False) 
+if __name__ == "__main__":
+
+    # Detect whether the app is running on Render
+    is_render = os.environ.get("RENDER") == "true"
+
+    if is_render:
+        # Render deployment
+        app.run(
+            host="0.0.0.0",
+            port=int(os.environ.get("PORT", 10000)),
+            debug=False
+        )
+
+    else:
+        # Local development
+        Timer(1.5, open_browser).start()
+
+        app.run(
+            host="127.0.0.1",
+            port=5000,
+            debug=True,
+            use_reloader=False
+        )
