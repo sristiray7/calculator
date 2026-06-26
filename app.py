@@ -8,15 +8,6 @@ import engines
 app = Flask(__name__, template_folder='templates', static_folder='static')
 CORS(app)
 
-# -------------------------------------------------------------------------
-# AUTO-LAUNCH BROWSER HOOK
-# -------------------------------------------------------------------------
-def open_browser():
-    """
-    Automatically triggers a system call to launch your default browser 
-    and open the calculator interface once the server goes live.
-    """
-    webbrowser.open_new("http://127.0.0.1:5000/")
 
 # -------------------------------------------------------------------------
 # UI ROUTE (Serves Frontend Shell Layout)
