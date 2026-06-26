@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced fx-991MS Matrix Workspace</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="calculator-container">
+        <div class="calculator-header">
+            <span class="brand">CASIO <small>fx-991MS SUPER SYSTEM</small></span>
+            <div class="theme-switch-wrapper">
+    <label class="theme-switch" for="checkbox">
+        <input type="checkbox" id="checkbox" onclick="toggleTheme()" />
+        <div class="slider round"></div>
+    </label>
+</div>
+            <div class="mode-selector-wrapper">
+                <label for="modeSelect">MODE: </label>
+                <select id="modeSelect" onchange="switchMode()">
+                    <option value="COMP">COMP (Arithmetic/Trig)</option>
+                    <option value="CMPLX">CMPLX (Complex Math)</option>
+                    <option value="BASE_N">BASE-N (Bitwise Logic)</option>
+                    <option value="EQN">EQN (Equation Solver)</option>
+                    <option value="MATRIX">MATRIX (Linear Algebra)</option>
+                    <option value="VECTOR">VECTOR (3D Vectors)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="calculator-screen">
+            <div id="screenModeIndicator" class="screen-indicator">COMP</div>
+            
+            <div id="screenInput" class="screen-input"></div>
+            <div id="screenResult" class="screen-result">0</div>
+        </div>
+
+        <div id="dynamicWorkspace" class="dynamic-workspace">
+            </div>
+
+        <div class="button-grid">
+            <button class="btn scientific" onclick="pressKey('sin(')">sin</button>
+            <button class="btn scientific" onclick="pressKey('cos(')">cos</button>
+            <button class="btn scientific" onclick="pressKey('tan(')">tan</button>
+            <button class="btn scientific" onclick="pressKey('^')">xʸ</button>
+            <button class="btn scientific" onclick="pressKey('π')">π</button>
+            
+            <button class="btn scientific" onclick="pressKey('log(')">log</button>
+            <button class="btn scientific" onclick="pressKey('ln(')">ln</button>
+            <button class="btn scientific" onclick="pressKey('sqrt(')">√</button>
+            <button class="btn scientific" onclick="pressKey('i')">i (Cmplx)</button>
+            <button id="factorialBtn" class="btn btn-secondary" onclick="pressKey('!')">x!</button>
+            <button class="btn operational" onclick="pressKey('(')">(</button>
+            <button class="btn operational" id="bracketRight" onclick="pressKey(')')">)</button>
+
+            <button class="btn num" onclick="pressKey('7')">7</button>
+            <button class="btn num" onclick="pressKey('8')">8</button>
+            <button class="btn num" onclick="pressKey('9')">9</button>
+            <button class="btn clear" onclick="clearScreen()">DEL</button>
+            <button class="btn clear" onclick="resetCalculator()">AC</button>
+
+            <button class="btn num" onclick="pressKey('4')">4</button>
+            <button class="btn num" onclick="pressKey('5')">5</button>
+            <button class="btn num" onclick="pressKey('6')">6</button>
+            <button class="btn operational" onclick="pressKey('*')">×</button>
+            <button class="btn operational" onclick="pressKey('/')">÷</button>
+
+            <button class="btn num" onclick="pressKey('1')">1</button>
+            <button class="btn num" onclick="pressKey('2')">2</button>
+            <button class="btn num" onclick="pressKey('3')">3</button>
+            <button class="btn operational" onclick="pressKey('+')">+</button>
+            <button class="btn operational" onclick="pressKey('-')">−</button>
+
+            <button class="btn num" onclick="pressKey('0')">0</button>
+            <button class="btn num" onclick="pressKey('.')">•</button>
+<div id="baseBtn" style="display:none;">
+    <button id="decBtn" onclick="setBaseN('DEC')">DEC</button>
+    <button id="hexBtn" onclick="setBaseN('HEX')">HEX</button>
+    <button id="binBtn" onclick="setBaseN('BIN')">BIN</button>
+    <button id="octBtn" onclick="setBaseN('OCT')">OCT</button>
+</div>
+            
+            <button class="btn evaluate" onclick="triggerCalculation()">=</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
